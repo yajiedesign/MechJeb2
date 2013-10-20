@@ -28,32 +28,32 @@ namespace MuMech
 
             if (core.target.PositionTargetExists)
             {
-                GUILayout.Label("Target coordinates:");
+                GUILayout.Label("目标坐标:");
 
                 core.target.targetLatitude.DrawEditGUI(EditableAngle.Direction.NS);
                 core.target.targetLongitude.DrawEditGUI(EditableAngle.Direction.EW);
             }
             else
             {
-                if (GUILayout.Button("Enter target coordinates"))
+                if (GUILayout.Button("输入目标坐标"))
                 {
                     core.target.SetPositionTarget(mainBody, core.target.targetLatitude, core.target.targetLongitude);
                 }
             }
 
-            if (GUILayout.Button("Pick target on map")) core.target.PickPositionTargetOnMap();
+            if (GUILayout.Button("在地图上选取目标")) core.target.PickPositionTargetOnMap();
 
             if (mainBody.bodyName.ToLower().Contains("kerbin"))
             {
-                if (GUILayout.Button("Target KSC"))
+                if (GUILayout.Button("目标基地"))
                 {
                     core.target.SetPositionTarget(mainBody, -0.10267, -74.57538);
                 }
             }
 
-            if (autopilot != null) core.node.autowarp = GUILayout.Toggle(core.node.autowarp, "Auto-warp");
+            if (autopilot != null) core.node.autowarp = GUILayout.Toggle(core.node.autowarp, "自动加速时间");
 
-            bool active = GUILayout.Toggle(predictor.enabled, "Show landing predictions");
+            bool active = GUILayout.Toggle(predictor.enabled, "显示着陆预测");
             if (predictor.enabled != active)
             {
                 if (active)
@@ -68,31 +68,31 @@ namespace MuMech
 
             if (predictor.enabled)
             {
-                predictor.makeAerobrakeNodes = GUILayout.Toggle(predictor.makeAerobrakeNodes, "Show aerobrake nodes");
+                predictor.makeAerobrakeNodes = GUILayout.Toggle(predictor.makeAerobrakeNodes, "显示空气刹车节点");
                 DrawGUIPrediction();
             }
 
             if (autopilot != null)
             {
-                GUILayout.Label("Autopilot:");
+                GUILayout.Label("自动驾驶仪:");
 
                 if (autopilot.enabled)
                 {
-                    if (GUILayout.Button("Abort autoland")) autopilot.StopLanding();
+                    if (GUILayout.Button("停止着陆")) autopilot.StopLanding();
                 }
                 else
                 {
                     GUILayout.BeginHorizontal();
                     if (!core.target.PositionTargetExists) GUI.enabled = false;
-                    if (GUILayout.Button("Land at target")) autopilot.LandAtPositionTarget(this);
+                    if (GUILayout.Button("在目标着陆")) autopilot.LandAtPositionTarget(this);
                     GUI.enabled = true;
-                    if (GUILayout.Button("Land somewhere")) autopilot.LandUntargeted(this);
+                    if (GUILayout.Button("任意着陆")) autopilot.LandUntargeted(this);
                     GUILayout.EndHorizontal();
                 }
 
-                GuiUtils.SimpleTextBox("Touchdown speed:", autopilot.touchdownSpeed, "m/s", 35);
+                GuiUtils.SimpleTextBox("接地速度:", autopilot.touchdownSpeed, "m/s", 35);
 
-                if (autopilot.enabled) GUILayout.Label("Status: " + autopilot.status);
+                if (autopilot.enabled) GUILayout.Label("状态: " + autopilot.status);
             }
 
             GUILayout.EndVertical();
@@ -137,7 +137,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Landing Guidance";
+            return "自动着陆";
         }
 
         public MechJebModuleLandingGuidance(MechJebCore core) : base(core) { }
