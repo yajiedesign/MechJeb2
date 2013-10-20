@@ -21,12 +21,12 @@ namespace MuMech
             core.thrust.LimitAccelerationInfoItem();
             core.thrust.LimitThrottleInfoItem();
             core.thrust.LimitToPreventFlameoutInfoItem();
-            core.thrust.smoothThrottle = GUILayout.Toggle(core.thrust.smoothThrottle, "Smooth throttle");
-            core.thrust.manageIntakes = GUILayout.Toggle(core.thrust.manageIntakes, "Manage air intakes");
+            core.thrust.smoothThrottle = GUILayout.Toggle(core.thrust.smoothThrottle, "平滑油门");
+            core.thrust.manageIntakes = GUILayout.Toggle(core.thrust.manageIntakes, "管理进气口");
             GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
             try
             {
-                GUILayout.Label("Jet safety margin");
+                GUILayout.Label("喷气安全界限");
                 core.thrust.flameoutSafetyPct.text = GUILayout.TextField(core.thrust.flameoutSafetyPct.text, 5);
                 GUILayout.Label("%");
             }
@@ -36,11 +36,11 @@ namespace MuMech
             }
 
             bool oldAutostage = core.staging.users.Contains(this);
-            bool newAutostage = GUILayout.Toggle(oldAutostage, "Autostage");
+            bool newAutostage = GUILayout.Toggle(oldAutostage, "自动进级");
             if (newAutostage && !oldAutostage) core.staging.users.Add(this);
             if (!newAutostage && oldAutostage) core.staging.users.Remove(this);
             
-            if (!core.staging.enabled && GUILayout.Button("Autostage once")) core.staging.AutostageOnce(this);
+            if (!core.staging.enabled && GUILayout.Button("自动进入下一级")) core.staging.AutostageOnce(this);
             
             if (core.staging.enabled) core.staging.AutostageSettingsInfoItem();
 
@@ -59,7 +59,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Utilities";
+            return "实用程序";
         }
     }
 }

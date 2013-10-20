@@ -28,36 +28,36 @@ namespace MuMech
 
             GUIStyle s = new GUIStyle(GUI.skin.label);
             s.alignment = TextAnchor.MiddleCenter;
-            GUILayout.Label("Landing", s);
+            GUILayout.Label("着陆", s);
 
             Runway[] runways = MechJebModuleSpaceplaneAutopilot.runways;
             int runwayIndex = Array.IndexOf(runways, autopilot.runway);
             runwayIndex = GuiUtils.ArrowSelector(runwayIndex, runways.Length, autopilot.runway.name);
             autopilot.runway = runways[runwayIndex];
 
-            GUILayout.Label("Distance to runway: " + MuUtils.ToSI(Vector3d.Distance(vesselState.CoM, autopilot.runway.Start(vesselState.CoM)), 0) + "m");
+            GUILayout.Label("距离跑道: " + MuUtils.ToSI(Vector3d.Distance(vesselState.CoM, autopilot.runway.Start(vesselState.CoM)), 0) + "m");
 
-            showLandingTarget = GUILayout.Toggle(showLandingTarget, "Show landing navball guidance");
+            showLandingTarget = GUILayout.Toggle(showLandingTarget, "在地平仪上显示轨迹");
 
-            if (GUILayout.Button("Autoland")) autopilot.Autoland(this);
+            if (GUILayout.Button("自动着陆")) autopilot.Autoland(this);
             if (autopilot.enabled && autopilot.mode == MechJebModuleSpaceplaneAutopilot.Mode.AUTOLAND
-                && GUILayout.Button("Abort")) autopilot.AutopilotOff();
+                && GUILayout.Button("停止")) autopilot.AutopilotOff();
 
-            GuiUtils.SimpleTextBox("Autoland glideslope:", autopilot.glideslope, "º");
+            GuiUtils.SimpleTextBox("着陆角度:", autopilot.glideslope, "º");
 
-            GUILayout.Label("Hold", s);
+            GUILayout.Label("保持", s);
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Initiate hold:")) autopilot.HoldHeadingAndAltitude(this);
-            GUILayout.Label("Heading:");
+            if (GUILayout.Button("开始保持:")) autopilot.HoldHeadingAndAltitude(this);
+            GUILayout.Label("航向:");
             autopilot.targetHeading.text = GUILayout.TextField(autopilot.targetHeading.text, GUILayout.Width(40));
-            GUILayout.Label("º Altitude:");
+            GUILayout.Label("º 高度:");
             autopilot.targetAltitude.text = GUILayout.TextField(autopilot.targetAltitude.text, GUILayout.Width(40));
             GUILayout.Label("m");
             GUILayout.EndHorizontal();
 
             if (autopilot.enabled && autopilot.mode == MechJebModuleSpaceplaneAutopilot.Mode.HOLD
-                && GUILayout.Button("Abort")) autopilot.AutopilotOff();
+                && GUILayout.Button("停止")) autopilot.AutopilotOff();
 
             GUILayout.EndVertical();
 
@@ -92,7 +92,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Spaceplane Guidance";
+            return "飞机驾驶";
         }
     }
 }

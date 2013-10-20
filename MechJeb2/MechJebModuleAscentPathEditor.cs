@@ -43,27 +43,27 @@ namespace MuMech
             double oldTurnShapeExponent = path.turnShapeExponent;
             double oldTurnEndAngle = path.turnEndAngle;
 
-            path.autoPath = GUILayout.Toggle(path.autoPath, "Automatic Altitude Turn", GUILayout.ExpandWidth(false));
+            path.autoPath = GUILayout.Toggle(path.autoPath, "自动确定转向高度", GUILayout.ExpandWidth(false));
 
             if (path.autoPath)
             {
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Turn start altitude: ");
+                GUILayout.Label("转向开始高度: ");
                 GUILayout.Label(MuUtils.ToSI(path.autoTurnStartAltitude,-1,2) + "m", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleRight });
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Turn end altitude: ");
+                GUILayout.Label("转向结束高度: ");
                 GUILayout.Label(MuUtils.ToSI(path.autoTurnEndAltitude,-1, 2) + "m", new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleRight }, GUILayout.ExpandWidth(true));
                 GUILayout.EndHorizontal();
             }
             else
             {
-                GuiUtils.SimpleTextBox("Turn start altitude:", path.turnStartAltitude, "km");
-                GuiUtils.SimpleTextBox("Turn end altitude:", path.turnEndAltitude, "km");
+                GuiUtils.SimpleTextBox("转向开始高度:", path.turnStartAltitude, "km");
+                GuiUtils.SimpleTextBox("转向结束高度:", path.turnEndAltitude, "km");
             }
 
-            GuiUtils.SimpleTextBox("Final flight path angle:", path.turnEndAngle, "°");
-            GuiUtils.SimpleTextBox("Turn shape:", path.turnShapeExponent, "%");
+            GuiUtils.SimpleTextBox("目标轨道倾角:", path.turnEndAngle, "°");
+            GuiUtils.SimpleTextBox("转向形状:", path.turnShapeExponent, "%");
 
             // Round the slider's value (0..1) to sliderPrecision decimal places.
             int sliderPrecision = 3;

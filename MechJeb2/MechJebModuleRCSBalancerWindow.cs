@@ -37,10 +37,10 @@ namespace MuMech
             bool wasEnabled = balancer.smartTranslation;
 
             GUILayout.BeginHorizontal();
-            balancer.smartTranslation = GUILayout.Toggle(balancer.smartTranslation, "Smart translation", GUILayout.Width(130));
+            balancer.smartTranslation = GUILayout.Toggle(balancer.smartTranslation, "智能平移", GUILayout.Width(130));
             GUIStyle s = new GUIStyle(GUI.skin.label);
             s.normal.textColor = Color.yellow;
-            GUILayout.Label("experimental", s);
+            GUILayout.Label("实验", s);
             GUILayout.EndHorizontal();
 
             if (wasEnabled != balancer.smartTranslation)
@@ -66,7 +66,7 @@ namespace MuMech
                 double oldFactorTranslate = balancer.tuningParamFactorTranslate;
                 double oldFactorWaste = balancer.tuningParamFactorWaste;
 
-                GuiUtils.SimpleTextBox("Overdrive", balancer.overdrive, "%");
+                GuiUtils.SimpleTextBox("过载", balancer.overdrive, "%");
 
                 double sliderVal = GUILayout.HorizontalSlider((float)balancer.overdrive, 0.0F, 1.0F);
                 int sliderPrecision = 3;
@@ -76,19 +76,19 @@ namespace MuMech
                     balancer.overdrive = new EditableDoubleMult(rounded, 0.01);
                 }
 
-                GUILayout.Label("Overdrive increases power when possible, at the cost of RCS fuel efficiency.");
+                GUILayout.Label("增加功率,但是消耗更多燃料");
 
                 // Advanced options
-                balancer.advancedOptions = GUILayout.Toggle(balancer.advancedOptions, "Advanced options");
+                balancer.advancedOptions = GUILayout.Toggle(balancer.advancedOptions, "高级选项");
                 if (balancer.advancedOptions)
                 {
                     // This doesn't work properly, and it might not even be needed.
                     //balancer.smartRotation = GUILayout.Toggle(balancer.smartRotation, "Smart rotation");
 
-                    GuiUtils.SimpleTextBox("Overdrive scale", balancer.overdriveScale);
-                    GuiUtils.SimpleTextBox("Torque factor", balancer.tuningParamFactorTorque);
-                    GuiUtils.SimpleTextBox("Translate factor", balancer.tuningParamFactorTranslate);
-                    GuiUtils.SimpleTextBox("Waste factor", balancer.tuningParamFactorWaste);
+                    GuiUtils.SimpleTextBox("过载比例", balancer.overdriveScale);
+                    GuiUtils.SimpleTextBox("扭矩系数", balancer.tuningParamFactorTorque);
+                    GuiUtils.SimpleTextBox("平移系数", balancer.tuningParamFactorTranslate);
+                    GuiUtils.SimpleTextBox("消耗系数", balancer.tuningParamFactorWaste);
                 }
 
                 // Apply tuning parameters.
@@ -123,7 +123,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "RCS Balancer";
+            return "RCS 平衡器";
         }
 
         public MechJebModuleRCSBalancerWindow(MechJebCore core) : base(core) { }

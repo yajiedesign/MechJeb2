@@ -10,7 +10,7 @@ namespace MuMech
     public class MechJebModuleCustomInfoWindow : DisplayModule
     {
         [Persistent(pass = (int)Pass.Global)]
-        public string title = "Custom Info Window";
+        public string title = "自定义信息";
         [Persistent(collectionIndex = "InfoItem", pass = (int)Pass.Global)]
         public List<InfoItem> items = new List<InfoItem>();
 

@@ -66,9 +66,9 @@ namespace MuMech
             if (showingGuidance)
             {
                 GUILayout.Label("The purple circle on the navball points along the ascent path.");
-                if (GUILayout.Button("Stop showing navball guidance")) core.target.Unset();
+                if (GUILayout.Button("停止显示上升路径")) core.target.Unset();
             }
-            else if (GUILayout.Button("Show navball ascent path guidance"))
+            else if (GUILayout.Button("在地平仪上显示上升路径"))
             {
                 core.target.SetDirectionTarget(TARGET_NAME);
             }
@@ -77,11 +77,11 @@ namespace MuMech
             {
                 if (autopilot.enabled)
                 {
-                    if (GUILayout.Button("Disengage autopilot")) autopilot.users.Remove(this);
+                    if (GUILayout.Button("停止自动发射")) autopilot.users.Remove(this);
                 }
                 else
                 {
-                    if (GUILayout.Button("Engage autopilot"))
+                    if (GUILayout.Button("开始自动发射"))
                     {
                         autopilot.users.Add(this);
                     }
@@ -89,21 +89,21 @@ namespace MuMech
 
                 ascentPath = autopilot.ascentPath;
 
-                GuiUtils.SimpleTextBox("Orbit altitude", autopilot.desiredOrbitAltitude, "km");
+                GuiUtils.SimpleTextBox("轨道高度", autopilot.desiredOrbitAltitude, "km");
                 autopilot.desiredInclination = desiredInclination;
             }
 
-            GuiUtils.SimpleTextBox("Orbit inclination", desiredInclination, "º");
+            GuiUtils.SimpleTextBox("轨道交角", desiredInclination, "º");
 
             core.thrust.LimitToPreventOverheatsInfoItem();
             core.thrust.LimitToTerminalVelocityInfoItem();
             core.thrust.LimitAccelerationInfoItem();
-            autopilot.correctiveSteering = GUILayout.Toggle(autopilot.correctiveSteering, "Corrective steering");
+            autopilot.correctiveSteering = GUILayout.Toggle(autopilot.correctiveSteering, "纠正转向");
 
-            autopilot.autostage = GUILayout.Toggle(autopilot.autostage, "Autostage");
+            autopilot.autostage = GUILayout.Toggle(autopilot.autostage, "自动进级");
             if(autopilot.autostage) core.staging.AutostageSettingsInfoItem();
 
-            core.node.autowarp = GUILayout.Toggle(core.node.autowarp, "Auto-warp");
+            core.node.autowarp = GUILayout.Toggle(core.node.autowarp, "自动时间加速");
 
             if (autopilot != null && vessel.LandedOrSplashed)
             {
@@ -112,7 +112,7 @@ namespace MuMech
                     if (!launchingToPlane && !launchingToRendezvous)
                     {
                         GUILayout.BeginHorizontal();
-                        if (GUILayout.Button("Launch to rendezvous:", GUILayout.ExpandWidth(false)))
+                        if (GUILayout.Button("汇合发射:", GUILayout.ExpandWidth(false)))
                         {
                             launchingToRendezvous = true;
                         }
@@ -120,7 +120,7 @@ namespace MuMech
                         GUILayout.Label("º", GUILayout.ExpandWidth(false));
                         GUILayout.EndHorizontal();
                     }
-                    if (!launchingToPlane && !launchingToRendezvous && GUILayout.Button("Launch into plane of target"))
+                    if (!launchingToPlane && !launchingToRendezvous && GUILayout.Button("发射到目标"))
                     {
                         launchingToPlane = true;
                     }
@@ -128,7 +128,7 @@ namespace MuMech
                 else
                 {
                     launchingToPlane = launchingToRendezvous = false;
-                    GUILayout.Label("Select a target for a timed launch.");
+                    GUILayout.Label("选择一个发射的目标.");
                 }
 
                 if (launchingToPlane || launchingToRendezvous)
@@ -149,24 +149,24 @@ namespace MuMech
 
                     if (autopilot.enabled) core.warp.WarpToUT(launchTime);
 
-                    GUILayout.Label("Launching to " + (launchingToPlane ? "target plane" : "rendezvous") + ": T-" + MuUtils.ToSI(tMinus, 0) + "s");
+                    GUILayout.Label("发射到" + (launchingToPlane ? "目标" : "目标") + ": T-" + MuUtils.ToSI(tMinus, 0) + "s");
                     if (tMinus < 3 * vesselState.deltaT)
                     {
                         if (autopilot.enabled) Staging.ActivateNextStage();
                         launchingToPlane = launchingToRendezvous = false;
                     }
 
-                    if (GUILayout.Button("Abort")) launchingToPlane = launchingToRendezvous = false;
+                    if (GUILayout.Button("停止")) launchingToPlane = launchingToRendezvous = false;
                 }
             }
 
             if (autopilot != null && autopilot.enabled)
             {
-                GUILayout.Label("Autopilot status: " + autopilot.status);
+                GUILayout.Label("自动驾驶状态: " + autopilot.status);
             }
 
             MechJebModuleAscentPathEditor editor = core.GetComputerModule<MechJebModuleAscentPathEditor>();
-            if (editor != null) editor.enabled = GUILayout.Toggle(editor.enabled, "Edit ascent path");
+            if (editor != null) editor.enabled = GUILayout.Toggle(editor.enabled, "编辑发射轨迹");
 
             GUILayout.EndVertical();
 
@@ -180,7 +180,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Ascent Guidance";
+            return "自动发射";
         }
     }
 }

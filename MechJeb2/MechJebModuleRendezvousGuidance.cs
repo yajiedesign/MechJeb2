@@ -16,14 +16,14 @@ namespace MuMech
         {
             if (!core.target.NormalTargetExists)
             {
-                GUILayout.Label("Select a target to rendezvous with.");
+                GUILayout.Label("选择汇合目标");
                 base.WindowGUI(windowID);
                 return;
             }
 
             if (core.target.Orbit.referenceBody != orbit.referenceBody)
             {
-                GUILayout.Label("Rendezvous target must be in the same sphere of influence.");
+                GUILayout.Label("汇合目标必须在同一引力圈内.");
                 base.WindowGUI(windowID);
                 return;
             }
@@ -32,21 +32,21 @@ namespace MuMech
 
             //Information readouts:
 
-            GuiUtils.SimpleLabel("Rendezvous target", core.target.Name);
+            GuiUtils.SimpleLabel("汇合目标", core.target.Name);
 
             double leadTime = 30;
-            GuiUtils.SimpleLabel("Target orbit", MuUtils.ToSI(core.target.Orbit.PeA, 3) + "m x " + MuUtils.ToSI(core.target.Orbit.ApA, 3) + "m");
-            GuiUtils.SimpleLabel("Current orbit", MuUtils.ToSI(orbit.PeA, 3) + "m x " + MuUtils.ToSI(orbit.ApA, 3) + "m");
-            GuiUtils.SimpleLabel("Relative inclination", orbit.RelativeInclination(core.target.Orbit).ToString("F2") + "º");
+            GuiUtils.SimpleLabel("目标轨道", MuUtils.ToSI(core.target.Orbit.PeA, 3) + "m x " + MuUtils.ToSI(core.target.Orbit.ApA, 3) + "m");
+            GuiUtils.SimpleLabel("当前轨道", MuUtils.ToSI(orbit.PeA, 3) + "m x " + MuUtils.ToSI(orbit.ApA, 3) + "m");
+            GuiUtils.SimpleLabel("相对倾角", orbit.RelativeInclination(core.target.Orbit).ToString("F2") + "º");
 
             double closestApproachTime = orbit.NextClosestApproachTime(core.target.Orbit, vesselState.time);
-            GuiUtils.SimpleLabel("Time until closest approach", GuiUtils.TimeToDHMS(closestApproachTime - vesselState.time));
-            GuiUtils.SimpleLabel("Separation at closest approach", MuUtils.ToSI(orbit.Separation(core.target.Orbit, closestApproachTime), 0) + "m");
+            GuiUtils.SimpleLabel("到达目标时间", GuiUtils.TimeToDHMS(closestApproachTime - vesselState.time));
+            GuiUtils.SimpleLabel("到达目标距离", MuUtils.ToSI(orbit.Separation(core.target.Orbit, closestApproachTime), 0) + "m");
 
 
             //Maneuver planning buttons:
 
-            if (GUILayout.Button("Align Planes"))
+            if (GUILayout.Button("调整平面"))
             {
                 double UT;
                 Vector3d dV;
@@ -64,7 +64,7 @@ namespace MuMech
 
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Establish new orbit at"))
+            if (GUILayout.Button("建立新轨道"))
             {
                 double phasingOrbitRadius = phasingOrbitAltitude + mainBody.Radius;
 
@@ -100,7 +100,7 @@ namespace MuMech
             GUILayout.Label("km", GUILayout.ExpandWidth(false));
             GUILayout.EndHorizontal();
 
-            if (GUILayout.Button("Intercept with Hohmann transfer"))
+            if (GUILayout.Button("使用霍夫曼转移汇合"))
             {
                 double UT;
                 Vector3d dV = OrbitalManeuverCalculator.DeltaVAndTimeForHohmannTransfer(orbit, core.target.Orbit, vesselState.time, out UT);
@@ -108,7 +108,7 @@ namespace MuMech
                 vessel.PlaceManeuverNode(orbit, dV, UT);
             }
 
-            if (GUILayout.Button("Match velocities at closest approach"))
+            if (GUILayout.Button("在最近的近拱点匹配速度"))
             {
                 double UT = closestApproachTime;
                 Vector3d dV = OrbitalManeuverCalculator.DeltaVToMatchVelocities(orbit, UT, core.target.Orbit);
@@ -116,7 +116,7 @@ namespace MuMech
                 vessel.PlaceManeuverNode(orbit, dV, UT);
             }
 
-            if (GUILayout.Button("Get closer"))
+            if (GUILayout.Button("接近"))
             {
                 double UT = vesselState.time;
                 double interceptUT = UT + 100;
@@ -137,7 +137,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Rendezvous Planner";
+            return "汇合规划";
         }
     }
 }

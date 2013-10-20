@@ -41,14 +41,14 @@ namespace MuMech
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Delays: pre:", GUILayout.ExpandWidth(false));
+            GUILayout.Label("延迟: 前:", GUILayout.ExpandWidth(false));
             autostagePreDelay.text = GUILayout.TextField(autostagePreDelay.text, GUILayout.Width(35));
-            GUILayout.Label("s  post:", GUILayout.ExpandWidth(false));
+            GUILayout.Label("秒 后:", GUILayout.ExpandWidth(false));
             autostagePostDelay.text = GUILayout.TextField(autostagePostDelay.text, GUILayout.Width(35));
-            GUILayout.Label("s", GUILayout.ExpandWidth(true));
+            GUILayout.Label("秒", GUILayout.ExpandWidth(true));
             GUILayout.EndHorizontal();
 
-            GuiUtils.SimpleTextBox("Stop at stage #", autostageLimit, "");
+            GuiUtils.SimpleTextBox("停止在第 #", autostageLimit, "级");
 
             GUILayout.EndVertical();
         }
@@ -56,9 +56,9 @@ namespace MuMech
         [ValueInfoItem("Autostaging status", InfoItem.Category.Misc)]
         public string AutostageStatus()
         {
-            if (!this.enabled) return "Autostaging off";
-            if (autostagingOnce) return "Will autostage next stage only";
-            return "Autostaging until stage #" + (int)autostageLimit;
+            if (!this.enabled) return "自动进级关闭";
+            if (autostagingOnce) return "仅自动进入下一级";
+            return "自动进级到 #" + (int)autostageLimit;
         }
 
         //internal state:

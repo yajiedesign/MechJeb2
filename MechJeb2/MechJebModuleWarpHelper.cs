@@ -24,13 +24,13 @@ namespace MuMech
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Warp to: ", GUILayout.ExpandWidth(false));
+            GUILayout.Label("加速到: ", GUILayout.ExpandWidth(false));
             warpTarget = (WarpTarget)GuiUtils.ArrowSelector((int)warpTarget, numWarpTargets, warpTargetStrings[(int)warpTarget]);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
 
-            GuiUtils.SimpleTextBox("Lead time: ", leadTime, "");
+            GuiUtils.SimpleTextBox("前置时间: ", leadTime, "");
 
             if (warping)
             {
@@ -47,7 +47,7 @@ namespace MuMech
 
             GUILayout.EndHorizontal();
 
-            if (warping) GUILayout.Label("Warping to " + (leadTime > 0 ? GuiUtils.TimeToDHMS(leadTime) + " before " : "") + warpTargetStrings[(int)warpTarget] + ".");
+            if (warping) GUILayout.Label("加速到" + (leadTime > 0 ? GuiUtils.TimeToDHMS(leadTime) + " 前 " : "") + warpTargetStrings[(int)warpTarget] + ".");
 
             GUILayout.EndVertical();
 
@@ -99,7 +99,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Warp Helper";
+            return "自动加速";
         }
 
         public MechJebModuleWarpHelper(MechJebCore core) : base(core) { }

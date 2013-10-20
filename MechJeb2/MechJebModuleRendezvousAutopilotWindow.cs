@@ -10,14 +10,14 @@ namespace MuMech
         {
             if (!core.target.NormalTargetExists)
             {
-                GUILayout.Label("Select a target to rendezvous with.");
+                GUILayout.Label("选择汇合目标.");
                 base.WindowGUI(windowID);
                 return;
             }
 
             if (core.target.Orbit.referenceBody != orbit.referenceBody)
             {
-                GUILayout.Label("Rendezvous target must be in the same sphere of influence.");
+                GUILayout.Label("汇合目标必须在同一引力圈内.");
                 base.WindowGUI(windowID);
                 return;
             }
@@ -27,20 +27,20 @@ namespace MuMech
             MechJebModuleRendezvousAutopilot autopilot = core.GetComputerModule<MechJebModuleRendezvousAutopilot>();
             if (autopilot != null)
             {
-                GuiUtils.SimpleLabel("Rendezvous target", core.target.Name);
+                GuiUtils.SimpleLabel("汇合目标", core.target.Name);
                 
                 if (!autopilot.enabled)
                 {
-                    if (GUILayout.Button("Engage autopilot")) autopilot.users.Add(this);
+                    if (GUILayout.Button("启动自动驾驶")) autopilot.users.Add(this);
                 }
                 else
                 {
-                    if (GUILayout.Button("Disengage autopilot")) autopilot.users.Remove(this);
+                    if (GUILayout.Button("关闭自动驾驶")) autopilot.users.Remove(this);
                 }
 
-                GuiUtils.SimpleTextBox("Desired final distance:", autopilot.desiredDistance, "m");
+                GuiUtils.SimpleTextBox("需要的最终距离:", autopilot.desiredDistance, "m");
 
-                if (autopilot.enabled) GUILayout.Label("Status: " + autopilot.status);
+                if (autopilot.enabled) GUILayout.Label("状态: " + autopilot.status);
             }
 
             GUILayout.EndVertical();
@@ -55,7 +55,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Rendezvous Autopilot";
+            return "自动汇合";
         }
     }
 }

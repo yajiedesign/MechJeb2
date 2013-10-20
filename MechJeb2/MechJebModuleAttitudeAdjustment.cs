@@ -26,7 +26,7 @@ namespace MuMech
 
             if (!core.attitude.useSAS)
             {
-                GUILayout.Label("Larger ship do better with a larger Tf");
+                GUILayout.Label("更大的船需要更大的TF");
                 GuiUtils.SimpleTextBox("Tf (s)", Tf);
                 Tf = Math.Max(0.01, Tf);
 

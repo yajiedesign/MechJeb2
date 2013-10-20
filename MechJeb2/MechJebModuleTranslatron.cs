@@ -9,7 +9,7 @@ namespace MuMech
 {
     public class MechJebModuleTranslatron : DisplayModule
     {
-        protected static string[] trans_texts = { "OFF", "KEEP\nOBT", "KEEP\nSURF", "KEEP\nVERT" };
+        protected static string[] trans_texts = { "关闭", "保持\nOBT", "保持\nSURF", "保持\nVERT" };
 
         public enum AbortStage
         {

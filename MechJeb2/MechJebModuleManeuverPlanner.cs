@@ -30,9 +30,9 @@ namespace MuMech
             INTERPLANETARY_TRANSFER, COURSE_CORRECTION, LAMBERT, KILL_RELVEL
         };
         static int numOperations = Enum.GetNames(typeof(Operation)).Length;
-        string[] operationStrings = new string[]{"circularize", "change periapsis", "change apoapsis", "change both Pe and Ap",
-                  "change inclination", "match planes with target", "Hohmann transfer to target", "return from a moon",
-                  "transfer to another planet", "fine tune closest approach to target", "intercept target at chosen time", "match velocities with target"};
+        string[] operationStrings = new string[]{"圆化轨道", "改变近拱点", "更改远拱点", "改变近拱点和远拱点",
+                  "更改倾角", "匹配目标轨道", "霍夫曼转移到目标", "从卫星返回",
+                  "转移到其他行星", "最后调整最接近目标", "在指定的时间拦截目标", "匹配目标速度"};
 
         public enum TimeReference
         {
@@ -76,16 +76,16 @@ namespace MuMech
             if (anyNodeExists)
             {
                 GUILayout.BeginHorizontal();
-                if (GUILayout.Button(createNode ? "Create a new" : "Change the last"))
+                if (GUILayout.Button(createNode ? "新建" : "修改上一个"))
                 {
                     createNode = !createNode;
                 }
-                GUILayout.Label("maneuver node to:");
+                GUILayout.Label("变轨计划:");
                 GUILayout.EndHorizontal();
             }
             else
             {
-                GUILayout.Label("Create a new maneuver node to:");
+                GUILayout.Label("新建变轨计划:");
                 createNode = true;
             }
 
@@ -98,12 +98,12 @@ namespace MuMech
             bool makingNode = false;
             bool executingNode = false;
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Create node"))
+            if (GUILayout.Button("新建计划"))
             {
                 makingNode = true;
                 executingNode = false;
             }
-            if (core.node != null && GUILayout.Button("Create and execute"))
+            if (core.node != null && GUILayout.Button("新建并执行计划"))
             {
                 makingNode = true;
                 executingNode = true;
@@ -140,7 +140,7 @@ namespace MuMech
                 GUILayout.Label(errorMessage, s);
             }
 
-            if (GUILayout.Button("Remove ALL nodes"))
+            if (GUILayout.Button("删除所有计划"))
             {
                 vessel.RemoveAllManeuverNodes();
             }
@@ -149,14 +149,14 @@ namespace MuMech
             {
                 if (anyNodeExists && !core.node.enabled)
                 {
-                    if (GUILayout.Button("Execute next node"))
+                    if (GUILayout.Button("执行下一个计划"))
                     {
                         core.node.ExecuteOneNode(this);
                     }
 
                     if (vessel.patchedConicSolver.maneuverNodes.Count > 1)
                     {
-                        if (GUILayout.Button("Execute all nodes"))
+                        if (GUILayout.Button("执行所有计划"))
                         {
                             core.node.ExecuteAllNodes(this);
                         }
@@ -164,15 +164,15 @@ namespace MuMech
                 }
                 else if (core.node.enabled)
                 {
-                    if (GUILayout.Button("Abort node execution"))
+                    if (GUILayout.Button("停止计划"))
                     {
                         core.node.Abort();
                     }
                 }
 
                 GUILayout.BeginHorizontal();
-                core.node.autowarp = GUILayout.Toggle(core.node.autowarp, "Auto-warp", GUILayout.ExpandWidth(true));
-                GUILayout.Label("Tolerance:", GUILayout.ExpandWidth(false));
+                core.node.autowarp = GUILayout.Toggle(core.node.autowarp, "自动时间加速", GUILayout.ExpandWidth(true));
+                GUILayout.Label("误差:", GUILayout.ExpandWidth(false));
                 core.node.tolerance.text = GUILayout.TextField(core.node.tolerance.text, GUILayout.Width(35), GUILayout.ExpandWidth(false));
                 GUILayout.Label("m/s", GUILayout.ExpandWidth(false));
                 GUILayout.EndHorizontal();
@@ -195,59 +195,59 @@ namespace MuMech
             switch (operation)
             {
                 case Operation.CIRCULARIZE:
-                    GUILayout.Label("Schedule the burn");
+                    GUILayout.Label("开始执行于");
                     break;
 
                 case Operation.ELLIPTICIZE:
                     GuiUtils.SimpleTextBox("New periapsis:", newPeA, "km");
                     GuiUtils.SimpleTextBox("New apoapsis:", newApA, "km");
-                    GUILayout.Label("Schedule the burn");
+                    GUILayout.Label("开始执行在");
                     break;
 
                 case Operation.PERIAPSIS:
                     GuiUtils.SimpleTextBox("New periapsis:", newPeA, "km");
-                    GUILayout.Label("Schedule the burn");
+                    GUILayout.Label("开始执行在");
                     break;
 
                 case Operation.APOAPSIS:
                     GuiUtils.SimpleTextBox("New apoapsis:", newApA, "km");
-                    GUILayout.Label("Schedule the burn");
+                    GUILayout.Label("开始执行在");
                     break;
 
                 case Operation.INCLINATION:
                     GuiUtils.SimpleTextBox("New inclination:", newInc, "º");
-                    GUILayout.Label("Schedule the burn");
+                    GUILayout.Label("开始执行在");
                     break;
 
                 case Operation.PLANE:
-                    GUILayout.Label("Schedule the burn");
+                    GUILayout.Label("开始执行在");
                     break;
 
                 case Operation.TRANSFER:
-                    GUILayout.Label("Schedule the burn at the next transfer window.");
+                    GUILayout.Label("开始执行在下一个转移窗口");
                     break;
 
                 case Operation.MOON_RETURN:
-                    GuiUtils.SimpleTextBox("Approximate final periapsis:", moonReturnAltitude, "km");
-                    GUILayout.Label("Schedule the burn at the next return window.");
+                    GuiUtils.SimpleTextBox("计划的近拱点:", moonReturnAltitude, "km");
+                    GUILayout.Label("开始执行在下一个返回窗口.");
                     break;
 
                 case Operation.INTERPLANETARY_TRANSFER:
-                    GUILayout.Label("Schedule the burn at the next transfer window.");
+                    GUILayout.Label("开始执行在下一个转移窗口.");
                     break;
 
                 case Operation.COURSE_CORRECTION:
                     if (core.target.Target is CelestialBody) GuiUtils.SimpleTextBox("Approximate final periapsis", courseCorrectFinalPeA, "km");
-                    GUILayout.Label("Schedule the burn to minimize the required ΔV.");
+                    GUILayout.Label("开始执行在所需ΔV最少时.");
                     break;
 
                 case Operation.LAMBERT:
-                    GuiUtils.SimpleTextBox("Time after burn to intercept target:", interceptInterval);
-                    GUILayout.Label("Schedule the burn");
+                    GuiUtils.SimpleTextBox("拦截目标提前时间:", interceptInterval);
+                    GUILayout.Label("开始执行在");
                     break;
 
                 case Operation.KILL_RELVEL:
-                    GUILayout.Label("Schedule the burn");
+                    GUILayout.Label("开始执行在");
                     break;
             }
         }
@@ -270,21 +270,21 @@ namespace MuMech
 	                {
 	                    switch (timeReference)
 	                    {
-	                        case TimeReference.APOAPSIS: GUILayout.Label("at the next apoapsis"); break;
-	                        case TimeReference.CLOSEST_APPROACH: GUILayout.Label("at closest approach to target"); break;
-	                        case TimeReference.EQ_ASCENDING: GUILayout.Label("at the equatorial AN"); break;
-	                        case TimeReference.EQ_DESCENDING: GUILayout.Label("at the equatorial DN"); break;
-	                        case TimeReference.PERIAPSIS: GUILayout.Label("at the next periapsis"); break;
-	                        case TimeReference.REL_ASCENDING: GUILayout.Label("at the next AN with the target."); break;
-	                        case TimeReference.REL_DESCENDING: GUILayout.Label("at the next DN with the target."); break;
+                            case TimeReference.APOAPSIS: GUILayout.Label("在下一个远拱点"); break;
+                            case TimeReference.CLOSEST_APPROACH: GUILayout.Label("在最接近目标"); break;
+                            case TimeReference.EQ_ASCENDING: GUILayout.Label("在赤道相交上升点"); break;
+                            case TimeReference.EQ_DESCENDING: GUILayout.Label("在赤道相交下降点"); break;
+                            case TimeReference.PERIAPSIS: GUILayout.Label("在下一个近拱点"); break;
+	                        case TimeReference.REL_ASCENDING: GUILayout.Label("下一个目标上升交汇点."); break;
+                            case TimeReference.REL_DESCENDING: GUILayout.Label("下一个目标下降交汇点."); break;
 	
 	                        case TimeReference.X_FROM_NOW:
 	                            leadTime.text = GUILayout.TextField(leadTime.text, GUILayout.Width(50));
-	                            GUILayout.Label(" from now");
+	                            GUILayout.Label(" 之后");
 	                            break;
 	
 	                        case TimeReference.ALTITUDE:
-	                            GuiUtils.SimpleTextBox("at an altitude of", circularizeAltitude, "km");
+	                            GuiUtils.SimpleTextBox("在高度", circularizeAltitude, "km");
 	                            break;
 	                    }
 	                });
@@ -303,7 +303,7 @@ namespace MuMech
             List<ManeuverNode> maneuverNodes = GetManeuverNodes();
             if (maneuverNodes.Count() > 0)
             {
-            	if (InvolveGUI) { GUILayout.Label("after the last maneuver node."); }
+            	if (InvolveGUI) { GUILayout.Label("最后一个计划之后."); }
                 ManeuverNode last = maneuverNodes.Last();
                 UT = last.UT;
                 o = last.nextPatch;
@@ -323,7 +323,7 @@ namespace MuMech
                     else
                     {
                         error = true;
-                        timeErrorMessage = "Warning: orbit is hyperbolic, so apoapsis doesn't exist.";
+                        timeErrorMessage = "警告:轨道是双曲线的,所以远拱点不存在.";
                     }
                     break;
 
@@ -339,7 +339,7 @@ namespace MuMech
                     else
                     {
                         error = true;
-                        timeErrorMessage = "Warning: no target selected.";
+                        timeErrorMessage = "警告:没有选择目标.";
                     }
                     break;
 
@@ -351,7 +351,7 @@ namespace MuMech
                     else
                     {
                         error = true;
-                        timeErrorMessage = "Warning: can't circularize at this altitude, since current orbit does not reach it.";
+                        timeErrorMessage = "警告：不能圆化在这个高度,因为目前的轨道不会达到.";
                     }
                     break;
 
@@ -363,7 +363,7 @@ namespace MuMech
                     else
                     {
                         error = true;
-                        timeErrorMessage = "Warning: equatorial ascending node doesn't exist.";
+                        timeErrorMessage = "警告：赤道递上升点不存在.";
                     }
                     break;
 
@@ -375,7 +375,7 @@ namespace MuMech
                     else
                     {
                         error = true;
-                        timeErrorMessage = "Warning: equatorial descending node doesn't exist.";
+                        timeErrorMessage = "警告：赤道递下降点不存在.";
                     }
                     break;
 
@@ -427,12 +427,12 @@ namespace MuMech
                     if (o.referenceBody.Radius + newPeA > o.Radius(UT))
                     {
                         error = true;
-                        errorMessage = "new periapsis cannot be higher than the altitude of the burn (" + burnAltitude + ")";
+                        errorMessage = "新的近拱点不可以高于燃烧高度 (" + burnAltitude + ")";
                     }
                     else if (o.referenceBody.Radius + newApA < o.Radius(UT))
                     {
                         error = true;
-                        errorMessage = "new apoapsis cannot be lower than the altitude of the burn (" + burnAltitude + ")";
+                        errorMessage = "新的远拱点不可以低于燃烧高度 (" + burnAltitude + ")";
                     }
                     else if (newPeA < -o.referenceBody.Radius)
                     {

@@ -21,7 +21,7 @@ namespace MuMech
         {
             if (!core.target.NormalTargetExists)
             {
-                GUILayout.Label("Choose a target to dock with");
+                GUILayout.Label("选择一个对接的目标");
                 base.WindowGUI(windowID);
                 return;
             }
@@ -33,14 +33,14 @@ namespace MuMech
             {
                 GUIStyle s = new GUIStyle(GUI.skin.label);
                 s.normal.textColor = Color.yellow;
-                GUILayout.Label("Warning: You need to control the vessel from a docking port. Right click a docking port and select \"Control from here\"",s);
+                GUILayout.Label("警告：您需要从一个对接端口控制船只。右键点击一个对接端口，并选择 \"Control from here\"", s);
             }
 
             if (!(core.target.Target is ModuleDockingNode))
             {
                 GUIStyle s = new GUIStyle(GUI.skin.label);
                 s.normal.textColor = Color.yellow;
-                GUILayout.Label("Warning: target is not a docking port. Right click the target docking port and select \"Set as target\"", s);
+                GUILayout.Label("警告：目标是不是一个对接端口。右键单击目标的对接端口和选择 \"Set as target\"", s);
             }
 
             bool onAxisNodeExists = false;
@@ -57,18 +57,18 @@ namespace MuMech
             {
                 GUIStyle s = new GUIStyle(GUI.skin.label);
                 s.normal.textColor = Color.yellow;
-                GUILayout.Label("Warning: this vessel is not controlled from a docking node. Right click the desired docking node on this vessel and select \"Control from here.\"", s);
+                GUILayout.Label("警告：此船是不是从对接节点控制。这个船只上右键单击所需的对接节点并选择 \"Control from here.\"", s);
             }
 
-            bool active = GUILayout.Toggle(autopilot.enabled, "Autopilot enabled");
-            GuiUtils.SimpleTextBox("Speed limit", autopilot.speedLimit, "m/s");
+            bool active = GUILayout.Toggle(autopilot.enabled, "启动自动驾驶仪");
+            GuiUtils.SimpleTextBox("速度限制", autopilot.speedLimit, "m/s");
 			
             if (autopilot.speedLimit < 0)
                 autopilot.speedLimit = 0;
 
 
             GUILayout.BeginHorizontal();
-            autopilot.forceRol = GUILayout.Toggle(autopilot.forceRol, "Force Roll :", GUILayout.ExpandWidth(false));
+            autopilot.forceRol = GUILayout.Toggle(autopilot.forceRol, "力矩 :", GUILayout.ExpandWidth(false));
 
             autopilot.rol.text = GUILayout.TextField(autopilot.rol.text, GUILayout.Width(30));
             GUILayout.Label("°", GUILayout.ExpandWidth(false));
@@ -88,14 +88,14 @@ namespace MuMech
 
             if (autopilot.enabled)
             {
-                GUILayout.Label("Status: " + autopilot.status);
+                GUILayout.Label("状态: " + autopilot.status);
                 Vector3d error = core.rcs.targetVelocity - vesselState.velocityVesselOrbit;
                 double error_x = Vector3d.Dot(error, vessel.GetTransform().right);
                 double error_y = Vector3d.Dot(error, vessel.GetTransform().forward);
                 double error_z = Vector3d.Dot(error, vessel.GetTransform().up);
-                GUILayout.Label("Error X: " + error_x.ToString("F2") + " m/s  [L/J]");
-                GUILayout.Label("Error Y: " + error_y.ToString("F2") + " m/s  [I/K]");
-                GUILayout.Label("Error Z: " + error_z.ToString("F2") + " m/s  [H/N]");
+                GUILayout.Label("错误 X: " + error_x.ToString("F2") + " m/s  [L/J]");
+                GUILayout.Label("错误 Y: " + error_y.ToString("F2") + " m/s  [I/K]");
+                GUILayout.Label("错误 Z: " + error_z.ToString("F2") + " m/s  [H/N]");
             }
 
             GUILayout.EndVertical();
@@ -115,7 +115,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Docking Autopilot";
+            return "自动对接";
         }
     }
 }
