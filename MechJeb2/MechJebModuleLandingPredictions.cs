@@ -91,6 +91,7 @@ namespace MuMech
 
 
             Orbit patch = GetReenteringPatch() ?? orbit;
+            //ReentrySimulation sim = new ReentrySimulation(patch, patch.StartUT, vesselState.massDrag / vesselState.mass, descentSpeedPolicy, endAltitudeASL, vesselState.limitedMaxThrustAccel);
             ReentrySimulation sim = new ReentrySimulation(patch, patch.StartUT, vesselState.massDrag / vesselState.mass, usableChutes, vesselState.mass, descentSpeedPolicy, endAltitudeASL, vesselState.limitedMaxThrustAccel);
 
             //Run the simulation in a separate thread

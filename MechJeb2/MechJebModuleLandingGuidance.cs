@@ -19,6 +19,7 @@ namespace MuMech
 
         public override GUILayoutOption[] WindowOptions()
         {
+
             return new GUILayoutOption[] { GUILayout.Width(200), GUILayout.Height(150) };
         }
 
@@ -28,6 +29,7 @@ namespace MuMech
 
             if (core.target.PositionTargetExists)
             {
+
                 GUILayout.Label("目标坐标:");
 
                 core.target.targetLatitude.DrawEditGUI(EditableAngle.Direction.NS);
@@ -35,6 +37,7 @@ namespace MuMech
             }
             else
             {
+
                 if (GUILayout.Button("输入目标坐标"))
                 {
                     core.target.SetPositionTarget(mainBody, core.target.targetLatitude, core.target.targetLongitude);
@@ -51,7 +54,9 @@ namespace MuMech
                 }
             }
 
+
             if (autopilot != null) core.node.autowarp = GUILayout.Toggle(core.node.autowarp, "自动加速时间");
+
 
             bool active = GUILayout.Toggle(predictor.enabled, "显示着陆预测");
             if (predictor.enabled != active)
@@ -92,15 +97,12 @@ namespace MuMech
 
                 GuiUtils.SimpleTextBox("Touchdown speed:", autopilot.touchdownSpeed, "m/s", 35);
 
-                if (autopilot.enabled) GUILayout.Label("状态: " + autopilot.status);
-                autopilot.deployGears = GUILayout.Toggle(autopilot.deployGears, "Deploy Landing Gear");
+ 				autopilot.deployGears = GUILayout.Toggle(autopilot.deployGears, "Deploy Landing Gear");
                 GuiUtils.SimpleTextBox("Stage Limit:", autopilot.limitGearsStage, "", 35);
                 autopilot.deployChutes = GUILayout.Toggle(autopilot.deployChutes, "Deploy Parachutes");
                 predictor.deployChutes = autopilot.deployChutes;
                 GuiUtils.SimpleTextBox("Stage Limit:", autopilot.limitChutesStage, "", 35);
-                predictor.limitChutesStage = autopilot.limitChutesStage;
-
-                if (autopilot.enabled) GUILayout.Label("Status: " + autopilot.status);
+                predictor.limitChutesStage = autopilot.limitChutesStage;                if (autopilot.enabled) GUILayout.Label("状态: " + autopilot.status);
             }
 
             GUILayout.EndVertical();

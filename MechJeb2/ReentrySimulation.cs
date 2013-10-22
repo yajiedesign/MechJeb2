@@ -14,6 +14,7 @@ namespace MuMech
         double scaleHeight;
         double bodyRadius;
         double gravParameter;
+
         double dragCoefficient; //massDrag / mass        
         double mass;
         Vector3d bodyAngularVelocity;
@@ -42,6 +43,7 @@ namespace MuMech
         double maxDragGees;
         double deltaVExpended;
         List<AbsoluteVector> trajectory;
+
 
         public ReentrySimulation(Orbit initialOrbit, double UT, double dragCoefficient, List<SimulatedParachute> parachuteList, double mass,
             IDescentSpeedPolicy descentSpeedPolicy, double endAltitudeASL, double maxThrustAccel)
@@ -247,6 +249,7 @@ namespace MuMech
         {
             if (!bodyHasAtmosphere) return Vector3d.zero;
             Vector3d airVel = SurfaceVelocity(pos, vel);
+
 
             double realDragCoefficient = dragCoefficient;
             double alt = pos.magnitude - bodyRadius; // bodyRadius or landedRadius ?
