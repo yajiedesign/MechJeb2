@@ -34,13 +34,13 @@ namespace MuMech
         {
             new Runway //The runway at KSC
             { 
-                name = "KSC runway",
+                name = "基地跑道",
                 start = new Runway.Endpoint { latitude = -0.050185, longitude = -74.490867, altitude = 67 }, 
                 end = new Runway.Endpoint { latitude = -0.0485981, longitude = -74.726413, altitude = 67 } 
             },
             new Runway //The runway on the island off the KSC coast.
             { 
-                name = "Island runway",
+                name = "岛屿跑道",
                 start = new Runway.Endpoint { latitude = -1.517306, longitude = -71.965488, altitude = 132 },
                 end = new Runway.Endpoint { latitude = -1.515980, longitude = -71.852408, altitude = 132 }
             }

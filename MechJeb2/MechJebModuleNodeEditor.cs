@@ -211,7 +211,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Maneuver Node Editor";
+            return "变轨节点编辑器";
         }
 
         public MechJebModuleNodeEditor(MechJebCore core) : base(core) { }

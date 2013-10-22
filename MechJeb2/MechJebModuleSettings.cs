@@ -24,7 +24,7 @@ namespace MuMech
         {
             GUILayout.BeginVertical();
 
-            if (GUILayout.Button("\nRestore factory default settings\n"))
+            if (GUILayout.Button("\n恢复出厂默认设置\n"))
             {
                 KSP.IO.FileInfo.CreateForType<MechJebCore>("mechjeb_settings_global.cfg").Delete();
                 KSP.IO.FileInfo.CreateForType<MechJebCore>("mechjeb_settings_type_" + vessel.vesselName + ".cfg").Delete();
@@ -33,8 +33,8 @@ namespace MuMech
 
             if (GuiUtils.skin == null || GuiUtils.skin.name != "KSP window 2")
             {
-                GUILayout.Label("Current skin: MechJeb 2");
-                if (GUILayout.Button("Use MechJeb 1 GUI skin"))
+                GUILayout.Label("当前皮肤: MechJeb 2");
+                if (GUILayout.Button("使用 MechJeb 1 皮肤"))
                 {
                     GuiUtils.LoadSkin(GuiUtils.SkinType.MechJeb1);
                     useOldSkin = true;
@@ -42,8 +42,8 @@ namespace MuMech
             }
             else
             {
-                GUILayout.Label("Current skin: MechJeb 1");
-                if (GUILayout.Button("Use MechJeb 2 GUI skin"))
+                GUILayout.Label("当前皮肤: MechJeb 1");
+                if (GUILayout.Button("使用 MechJeb 2 皮肤"))
                 {
                     GuiUtils.LoadSkin(GuiUtils.SkinType.Default);
                     useOldSkin = false;
@@ -57,7 +57,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Settings";
+            return "设定";
         }
 
         public override GUILayoutOption[] WindowOptions()

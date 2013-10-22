@@ -276,8 +276,8 @@ namespace MuMech
 
                 if (!(selectedItemIndex >= 0 && selectedItemIndex < editedWindow.items.Count)) selectedItemIndex = -1;
 
-                if (GUILayout.Button("Remove") && selectedItemIndex != -1) editedWindow.items.RemoveAt(selectedItemIndex);
-                if (GUILayout.Button("Move up") && selectedItemIndex != -1)
+                if (GUILayout.Button("删除") && selectedItemIndex != -1) editedWindow.items.RemoveAt(selectedItemIndex);
+                if (GUILayout.Button("上移") && selectedItemIndex != -1)
                 {
                     if (selectedItemIndex > 0)
                     {
@@ -287,7 +287,7 @@ namespace MuMech
                         selectedItemIndex -= 1;
                     }
                 }
-                if (GUILayout.Button("Move down") && selectedItemIndex != -1)
+                if (GUILayout.Button("下移") && selectedItemIndex != -1)
                 {
                     if (selectedItemIndex < editedWindow.items.Count)
                     {
@@ -338,7 +338,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Custom Window Editor";
+            return "窗口信息编辑器";
         }
 
         public MechJebModuleCustomWindowEditor(MechJebCore core)
@@ -658,10 +658,10 @@ namespace MuMech
         {
             new Preset
             {
-                name = "Orbit Info",
+                name = "轨道信息",
                 sharingString =
 @"--- MechJeb Custom Window ---
-Name: Orbit Info
+Name: 轨道信息
 Show in: flight
 Value:VesselState.speedOrbital
 Value:VesselState.orbitApA
@@ -677,10 +677,10 @@ Value:VesselState.angleToPrograde
 
             new Preset
             {
-                name = "Surface Info",
+                name = "地面信息",
                 sharingString =
 @"--- MechJeb Custom Window ---
-Name: Surface Info
+Name: 地面信息
 Show in: flight
 Value:VesselState.altitudeASL
 Value:VesselState.altitudeTrue
@@ -696,10 +696,10 @@ Value:InfoItems.GetCoordinateString
 
             new Preset
             {
-                name = "Vessel Info",
+                name = "飞船信息",
                 sharingString =
 @"--- MechJeb Custom Window ---
-Name: Vessel Info
+Name: 飞船信息
 Show in: flight editor
 Value:InfoItems.MaxAcceleration
 Value:InfoItems.CurrentAcceleration
@@ -712,10 +712,10 @@ Value:InfoItems.CrewCapacity
 
             new Preset
             {
-                name = "Delta-V Stats",
+                name = "ΔV 状态",
                 sharingString =
 @"--- MechJeb Custom Window ---
-Name: Delta-V Stats
+Name: ΔV 状态
 Show in: flight editor
 Value:InfoItems.StageDeltaVAtmosphereAndVac
 Value:InfoItems.TotalDeltaVAtmosphereAndVac

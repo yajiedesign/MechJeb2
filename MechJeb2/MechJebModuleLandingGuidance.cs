@@ -95,14 +95,15 @@ namespace MuMech
                     GUILayout.EndHorizontal();
                 }
 
-                GuiUtils.SimpleTextBox("Touchdown speed:", autopilot.touchdownSpeed, "m/s", 35);
+                GuiUtils.SimpleTextBox("落地速度:", autopilot.touchdownSpeed, "m/s", 35);
 
- 				autopilot.deployGears = GUILayout.Toggle(autopilot.deployGears, "Deploy Landing Gear");
-                GuiUtils.SimpleTextBox("Stage Limit:", autopilot.limitGearsStage, "", 35);
-                autopilot.deployChutes = GUILayout.Toggle(autopilot.deployChutes, "Deploy Parachutes");
+                autopilot.deployGears = GUILayout.Toggle(autopilot.deployGears, "部署起落架");
+                GuiUtils.SimpleTextBox("分级编号限制:", autopilot.limitGearsStage, "", 35);
+                autopilot.deployChutes = GUILayout.Toggle(autopilot.deployChutes, "部署降落伞");
                 predictor.deployChutes = autopilot.deployChutes;
-                GuiUtils.SimpleTextBox("Stage Limit:", autopilot.limitChutesStage, "", 35);
-                predictor.limitChutesStage = autopilot.limitChutesStage;                if (autopilot.enabled) GUILayout.Label("状态: " + autopilot.status);
+                GuiUtils.SimpleTextBox("分级编号限制:", autopilot.limitChutesStage, "", 35);
+                predictor.limitChutesStage = autopilot.limitChutesStage;               
+                if (autopilot.enabled) GUILayout.Label("状态: " + autopilot.status);
             }
 
             GUILayout.EndVertical();
@@ -147,7 +148,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Landing Guidance";
+            return "自动着陆";
         }
 
         public MechJebModuleLandingGuidance(MechJebCore core) : base(core) { }

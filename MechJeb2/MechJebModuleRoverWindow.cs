@@ -19,7 +19,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Rover Autopilot";
+            return "小车自动驾驶";
         }
 
         public override GUILayoutOption[] WindowOptions()

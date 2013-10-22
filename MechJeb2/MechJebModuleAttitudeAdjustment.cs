@@ -117,7 +117,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Attitude Adjustment";
+            return "姿态调整";
         }
     }
 }

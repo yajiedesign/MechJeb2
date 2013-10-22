@@ -356,19 +356,19 @@ namespace MuMech
             }
         }
 
-        [ValueInfoItem("Max acceleration", InfoItem.Category.Vessel, format = ValueInfoItem.SI, units = "m/s²", showInEditor = true)]
+        [ValueInfoItem("最大加速度", InfoItem.Category.Vessel, format = ValueInfoItem.SI, units = "m/s²", showInEditor = true)]
         public double MaxAcceleration()
         {
             return MaxThrust() / VesselMass();
         }
 
-        [ValueInfoItem("Min acceleration", InfoItem.Category.Vessel, format = ValueInfoItem.SI, units = "m/s²", showInEditor = true)]
+        [ValueInfoItem("最小加速度", InfoItem.Category.Vessel, format = ValueInfoItem.SI, units = "m/s²", showInEditor = true)]
         public double MinAcceleration()
         {
             return MinThrust() / VesselMass();
         }
 
-        [ValueInfoItem("Drag coefficient", InfoItem.Category.Vessel, format = "F3", showInEditor = true)]
+        [ValueInfoItem("风阻系数", InfoItem.Category.Vessel, format = "F3", showInEditor = true)]
         public double DragCoefficient()
         {
             if (HighLogic.LoadedSceneIsEditor)
@@ -382,31 +382,31 @@ namespace MuMech
             }
         }
 
-        [ValueInfoItem("Part count", InfoItem.Category.Vessel, showInEditor = true)]
+        [ValueInfoItem("零件数量", InfoItem.Category.Vessel, showInEditor = true)]
         public int PartCount()
         {
             return parts.Count;
         }
 
-        [ValueInfoItem("Strut count", InfoItem.Category.Vessel, showInEditor = true)]
+        [ValueInfoItem("支柱数量", InfoItem.Category.Vessel, showInEditor = true)]
         public int StrutCount()
         {
             return parts.Count(p => p is StrutConnector);
         }
 
-        [ValueInfoItem("Vessel cost", InfoItem.Category.Vessel, showInEditor = true, format = ValueInfoItem.SI, units = "$")]
+        [ValueInfoItem("飞船成本", InfoItem.Category.Vessel, showInEditor = true, format = ValueInfoItem.SI, units = "$")]
         public double VesselCost()
         {
             return parts.Sum(p => p.partInfo.cost) * 1000;
         }
 
-        [ValueInfoItem("Crew count", InfoItem.Category.Vessel)]
+        [ValueInfoItem("船员数量", InfoItem.Category.Vessel)]
         public int CrewCount()
         {
             return vessel.GetCrewCount();
         }
 
-        [ValueInfoItem("Crew capacity", InfoItem.Category.Vessel, showInEditor = true)]
+        [ValueInfoItem("船员能力", InfoItem.Category.Vessel, showInEditor = true)]
         public int CrewCapacity()
         {
             return parts.Sum(p => p.CrewCapacity);
@@ -642,8 +642,8 @@ namespace MuMech
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Stage stats", GUILayout.ExpandWidth(true));
-            if (GUILayout.Button("All stats", GUILayout.ExpandWidth(false)))
+            GUILayout.Label("级数信息", GUILayout.ExpandWidth(true));
+            if (GUILayout.Button("所有信息", GUILayout.ExpandWidth(false)))
             {
                 if (showInitialMass)
                 {
@@ -660,15 +660,15 @@ namespace MuMech
             double geeASL = (HighLogic.LoadedSceneIsEditor ? 1 : mainBody.GeeASL);
 
             GUILayout.BeginHorizontal();
-            DrawStageStatsColumn("Stage", stages.Select(s => s.ToString()));
-            if (showInitialMass) showInitialMass = !DrawStageStatsColumn("Start mass", stages.Select(s => stats.vacStats[s].startMass.ToString("F1") + " t"));
-            if (showFinalMass) showFinalMass = !DrawStageStatsColumn("End mass", stages.Select(s => stats.vacStats[s].endMass.ToString("F1") + " t"));
-            if (showInitialTWR) showInitialTWR = !DrawStageStatsColumn("TWR", stages.Select(s => stats.vacStats[s].StartTWR(geeASL).ToString("F2")));
-            if (showMaxTWR) showMaxTWR = !DrawStageStatsColumn("Max TWR", stages.Select(s => stats.vacStats[s].MaxTWR(geeASL).ToString("F2")));
-            if (showAtmoDeltaV) showAtmoDeltaV = !DrawStageStatsColumn("Atmo ΔV", stages.Select(s => stats.atmoStats[s].deltaV.ToString("F0") + " m/s"));
-            if (showAtmoTime) showAtmoTime = !DrawStageStatsColumn("Atmo time", stages.Select(s => GuiUtils.TimeToDHMS(stats.atmoStats[s].deltaTime)));
-            if (showVacDeltaV) showVacDeltaV = !DrawStageStatsColumn("Vac ΔV", stages.Select(s => stats.vacStats[s].deltaV.ToString("F0") + " m/s"));
-            if (showVacTime) showVacTime = !DrawStageStatsColumn("Vac time", stages.Select(s => GuiUtils.TimeToDHMS(stats.vacStats[s].deltaTime)));
+            DrawStageStatsColumn("级数", stages.Select(s => s.ToString()));
+            if (showInitialMass) showInitialMass = !DrawStageStatsColumn("起始质量", stages.Select(s => stats.vacStats[s].startMass.ToString("F1") + " t"));
+            if (showFinalMass) showFinalMass = !DrawStageStatsColumn("结束质量", stages.Select(s => stats.vacStats[s].endMass.ToString("F1") + " t"));
+            if (showInitialTWR) showInitialTWR = !DrawStageStatsColumn("推重比", stages.Select(s => stats.vacStats[s].StartTWR(geeASL).ToString("F2")));
+            if (showMaxTWR) showMaxTWR = !DrawStageStatsColumn("最大推重比", stages.Select(s => stats.vacStats[s].MaxTWR(geeASL).ToString("F2")));
+            if (showAtmoDeltaV) showAtmoDeltaV = !DrawStageStatsColumn("大气燃烧ΔV", stages.Select(s => stats.atmoStats[s].deltaV.ToString("F0") + " m/s"));
+            if (showAtmoTime) showAtmoTime = !DrawStageStatsColumn("大气燃烧时间", stages.Select(s => GuiUtils.TimeToDHMS(stats.atmoStats[s].deltaTime)));
+            if (showVacDeltaV) showVacDeltaV = !DrawStageStatsColumn("真空燃烧ΔV", stages.Select(s => stats.vacStats[s].deltaV.ToString("F0") + " m/s"));
+            if (showVacTime) showVacTime = !DrawStageStatsColumn("真空时间", stages.Select(s => GuiUtils.TimeToDHMS(stats.vacStats[s].deltaTime)));
             GUILayout.EndHorizontal();
 
             GUILayout.EndVertical();
@@ -694,8 +694,8 @@ namespace MuMech
 
             stats.RequestUpdate(this);
         }*/
-        
-        [ValueInfoItem("Stage ΔV (vac)", InfoItem.Category.Vessel, format = "F0", units = "m/s", showInEditor = true)]
+
+        [ValueInfoItem("本级ΔV (真空燃烧)", InfoItem.Category.Vessel, format = "F0", units = "m/s", showInEditor = true)]
         public float StageDeltaVVacuum()
         {
             MechJebModuleStageStats stats = core.GetComputerModule<MechJebModuleStageStats>();
@@ -706,7 +706,7 @@ namespace MuMech
             return stats.vacStats[stats.vacStats.Length - 1].deltaV;
         }
 
-        [ValueInfoItem("Stage ΔV (atmo)", InfoItem.Category.Vessel, format = "F0", units = "m/s", showInEditor = true)]
+        [ValueInfoItem("本级ΔV (大气燃烧)", InfoItem.Category.Vessel, format = "F0", units = "m/s", showInEditor = true)]
         public float StageDeltaVAtmosphere()
         {
             MechJebModuleStageStats stats = core.GetComputerModule<MechJebModuleStageStats>();
@@ -717,7 +717,7 @@ namespace MuMech
             return stats.atmoStats[stats.atmoStats.Length - 1].deltaV;
         }
 
-        [ValueInfoItem("Stage ΔV (atmo, vac)", InfoItem.Category.Vessel, units = "m/s", showInEditor = true)]
+        [ValueInfoItem("本级ΔV (大气燃烧, 真空燃烧)", InfoItem.Category.Vessel, units = "m/s", showInEditor = true)]
         public string StageDeltaVAtmosphereAndVac()
         {
             MechJebModuleStageStats stats = core.GetComputerModule<MechJebModuleStageStats>();
@@ -729,7 +729,7 @@ namespace MuMech
             return String.Format("{0:F0}, {1:F0}", atmDv, vacDv);
         }
 
-        [ValueInfoItem("Stage time (full throttle)", InfoItem.Category.Vessel, format = ValueInfoItem.TIME, showInEditor = true)]
+        [ValueInfoItem("燃烧时间 (全油门)", InfoItem.Category.Vessel, format = ValueInfoItem.TIME, showInEditor = true)]
         public float StageTimeLeftFullThrottle()
         {
             MechJebModuleStageStats stats = core.GetComputerModule<MechJebModuleStageStats>();
@@ -744,7 +744,7 @@ namespace MuMech
             return timeLeft;
         }
 
-        [ValueInfoItem("Stage time (current throttle)", InfoItem.Category.Vessel, format = ValueInfoItem.TIME)]
+        [ValueInfoItem("燃烧时间(当前油门)", InfoItem.Category.Vessel, format = ValueInfoItem.TIME)]
         public float StageTimeLeftCurrentThrottle()
         {
             float fullThrottleTime = StageTimeLeftFullThrottle();
@@ -753,7 +753,7 @@ namespace MuMech
             return fullThrottleTime / FlightInputHandler.state.mainThrottle;
         }
 
-        [ValueInfoItem("Stage time (hover)", InfoItem.Category.Vessel, format = ValueInfoItem.TIME)]
+        [ValueInfoItem("燃烧时间(悬停)", InfoItem.Category.Vessel, format = ValueInfoItem.TIME)]
         public float StageTimeLeftHover()
         {
             float fullThrottleTime = StageTimeLeftFullThrottle();
@@ -763,7 +763,7 @@ namespace MuMech
             return fullThrottleTime / (float)hoverThrottle;
         }
 
-        [ValueInfoItem("Total ΔV (vacuum)", InfoItem.Category.Vessel, format = "F0", units = "m/s", showInEditor = true)]
+        [ValueInfoItem("总ΔV(真空燃烧)", InfoItem.Category.Vessel, format = "F0", units = "m/s", showInEditor = true)]
         public float TotalDeltaVVaccum()
         {
             MechJebModuleStageStats stats = core.GetComputerModule<MechJebModuleStageStats>();
@@ -771,7 +771,7 @@ namespace MuMech
             return stats.vacStats.Sum(s => s.deltaV);
         }
 
-        [ValueInfoItem("Total ΔV (atmo)", InfoItem.Category.Vessel, format = "F0", units = "m/s", showInEditor = true)]
+        [ValueInfoItem("总ΔV(大气燃烧)", InfoItem.Category.Vessel, format = "F0", units = "m/s", showInEditor = true)]
         public float TotalDeltaVAtmosphere()
         {
             MechJebModuleStageStats stats = core.GetComputerModule<MechJebModuleStageStats>();
@@ -779,7 +779,7 @@ namespace MuMech
             return stats.atmoStats.Sum(s => s.deltaV);
         }
 
-        [ValueInfoItem("Total ΔV (atmo, vac)", InfoItem.Category.Vessel, units = "m/s", showInEditor = true)]
+        [ValueInfoItem("总ΔV(大气燃烧, 真空燃烧)", InfoItem.Category.Vessel, units = "m/s", showInEditor = true)]
         public string TotalDeltaVAtmosphereAndVac()
         {
             MechJebModuleStageStats stats = core.GetComputerModule<MechJebModuleStageStats>();

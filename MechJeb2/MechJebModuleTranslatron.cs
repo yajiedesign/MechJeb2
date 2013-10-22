@@ -33,7 +33,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Translatron";
+            return "自动悬停";
         }
 
         public override GUILayoutOption[] WindowOptions()
@@ -89,12 +89,12 @@ namespace MuMech
 
                 core.thrust.trans_kill_h = GUILayout.Toggle(core.thrust.trans_kill_h, "Kill H/S", GUILayout.ExpandWidth(true));
                 GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
-                GUILayout.Label("Speed");
+                GUILayout.Label("速度");
                 trans_spd = GUILayout.TextField(trans_spd, GUILayout.ExpandWidth(true));
                 trans_spd = Regex.Replace(trans_spd, @"[^\d.+-]", "");
                 GUILayout.EndHorizontal();
 
-                if (GUILayout.Button("EXECUTE", sty, GUILayout.ExpandWidth(true)))
+                if (GUILayout.Button("执行", sty, GUILayout.ExpandWidth(true)))
                 {
                     core.thrust.trans_spd_act = Convert.ToSingle(trans_spd);
                     GUIUtility.keyboardControl = 0;
@@ -103,7 +103,7 @@ namespace MuMech
 
             if (core.thrust.tmode != MechJebModuleThrustController.TMode.OFF)
             {
-                GUILayout.Label("Active speed: " + MuMech.MuUtils.ToSI(core.thrust.trans_spd_act) + "m/s", GUILayout.ExpandWidth(true));
+                GUILayout.Label("执行速度: " + MuMech.MuUtils.ToSI(core.thrust.trans_spd_act) + "m/s", GUILayout.ExpandWidth(true));
             }
 
             GUILayout.FlexibleSpace();

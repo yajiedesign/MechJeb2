@@ -740,7 +740,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Maneuver Planner";
+            return "变轨规划";
         }
     }
 }

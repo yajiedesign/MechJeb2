@@ -38,8 +38,8 @@ namespace MuMech
             AUTO
         }
         public static Mode[] Target2Mode = { Mode.ORBITAL, Mode.ORBITAL, Mode.ORBITAL, Mode.SURFACE, Mode.ORBITAL, Mode.ORBITAL, Mode.ORBITAL, Mode.ORBITAL, Mode.ORBITAL, Mode.ORBITAL, Mode.TARGET, Mode.TARGET, Mode.TARGET, Mode.TARGET, Mode.TARGET, Mode.TARGET, Mode.ADVANCED, Mode.AUTO };
-        public static string[] ModeTexts = { "OBT", "SURF", "TGT", "ADV", "AUTO" };
-        public static string[] TargetTexts = { "OFF", "KILL\nROT", "NODE", "SURF", "PRO\nGRAD", "RETR\nGRAD", "NML\n+", "NML\n-", "RAD\n+", "RAD\n-", "RVEL\n+", "RVEL\n-", "TGT\n+", "TGT\n-", "PAR\n+", "PAR\n-", "ADV", "AUTO" };
+        public static string[] ModeTexts = { "轨道", "地面", "目标", "高级", "自动" };
+        public static string[] TargetTexts = { "关闭", "稳定\n姿态", "动作\n方向", "地面", "顺向", "逆向", "右手", "左手", "离心", "向心", "RVEL\n+", "RVEL\n-", "TGT\n+", "TGT\n-", "PAR\n+", "PAR\n-", "高级", "自动" };
 
         public static GUIStyle btNormal, btActive, btAuto;
 
@@ -310,7 +310,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "Smart A.S.S.";
+            return "智能 A.S.S.";
         }
     }
 }

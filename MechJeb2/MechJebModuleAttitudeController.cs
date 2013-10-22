@@ -99,7 +99,7 @@ namespace MuMech
             }
         }
 
-        [Persistent(pass = (int)Pass.Global | (int)Pass.Type), ToggleInfoItem("Use stock SAS", InfoItem.Category.Vessel)]
+        [Persistent(pass = (int)Pass.Global | (int)Pass.Type), ToggleInfoItem("使用原始SAS", InfoItem.Category.Vessel)]
         public bool useSAS = false;
 
         protected Quaternion lastSAS = new Quaternion();

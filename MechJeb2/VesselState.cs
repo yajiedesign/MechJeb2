@@ -43,20 +43,20 @@ namespace MuMech
         public Vector3d normalPlusSurface;  //unit vector perpendicular to up and velocityVesselSurface
 
         public Vector3d gravityForce;
-        [ValueInfoItem("Local gravity", InfoItem.Category.Misc, format = ValueInfoItem.SI, units = "m/s²")]
+        [ValueInfoItem("局部重力", InfoItem.Category.Misc, format = ValueInfoItem.SI, units = "m/s²")]
         public double localg;             //magnitude of gravityForce
 
         //How about changing these so we store the instantaneous values and *also*
         //the smoothed MovingAverages? Sometimes we need the instantaneous value.
-        [ValueInfoItem("Orbital speed", InfoItem.Category.Orbit, format = ValueInfoItem.SI, units = "m/s")]
+        [ValueInfoItem("轨道速度", InfoItem.Category.Orbit, format = ValueInfoItem.SI, units = "m/s")]
         public MovingAverage speedOrbital = new MovingAverage();
-        [ValueInfoItem("Surface speed", InfoItem.Category.Surface, format = ValueInfoItem.SI, units = "m/s")]
+        [ValueInfoItem("地面速度", InfoItem.Category.Surface, format = ValueInfoItem.SI, units = "m/s")]
         public MovingAverage speedSurface = new MovingAverage();
-        [ValueInfoItem("Vertical speed", InfoItem.Category.Surface, format = ValueInfoItem.SI, units = "m/s")]
+        [ValueInfoItem("垂直速度", InfoItem.Category.Surface, format = ValueInfoItem.SI, units = "m/s")]
         public MovingAverage speedVertical = new MovingAverage();
-        [ValueInfoItem("Surface horizontal speed", InfoItem.Category.Surface, format = ValueInfoItem.SI, units = "m/s")]
+        [ValueInfoItem("表面水平速度", InfoItem.Category.Surface, format = ValueInfoItem.SI, units = "m/s")]
         public MovingAverage speedSurfaceHorizontal = new MovingAverage();
-        [ValueInfoItem("Orbit horizontal speed", InfoItem.Category.Orbit, format = ValueInfoItem.SI, units = "m/s")]
+        [ValueInfoItem("轨道横向速度", InfoItem.Category.Orbit, format = ValueInfoItem.SI, units = "m/s")]
         public double speedOrbitHorizontal;
         [ValueInfoItem("Heading", InfoItem.Category.Surface, format = "F1", units = "º")]
         public MovingAverage vesselHeading = new MovingAverage();
@@ -64,35 +64,35 @@ namespace MuMech
         public MovingAverage vesselPitch = new MovingAverage();
         [ValueInfoItem("Roll", InfoItem.Category.Surface, format = "F1", units = "º")]
         public MovingAverage vesselRoll = new MovingAverage();
-        [ValueInfoItem("Altitude (ASL)", InfoItem.Category.Surface, format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = -1, units = "m")]
+        [ValueInfoItem("海拔 (ASL)", InfoItem.Category.Surface, format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = -1, units = "m")]
         public MovingAverage altitudeASL = new MovingAverage();
-        [ValueInfoItem("Altitude (true)", InfoItem.Category.Surface, format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = 0, units = "m")]
+        [ValueInfoItem("海拔 (true)", InfoItem.Category.Surface, format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = 0, units = "m")]
         public MovingAverage altitudeTrue = new MovingAverage();
-        [ValueInfoItem("Altitude (bottom)", InfoItem.Category.Surface, format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = 0, units = "m")]
+        [ValueInfoItem("海拔 (bottom)", InfoItem.Category.Surface, format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = 0, units = "m")]
         public double altitudeBottom = 0;
-        [ValueInfoItem("Apoapsis", InfoItem.Category.Orbit, units = "m", format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = 0, category = InfoItem.Category.Orbit)]
+        [ValueInfoItem("远拱点", InfoItem.Category.Orbit, units = "m", format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = 0, category = InfoItem.Category.Orbit)]
         public MovingAverage orbitApA = new MovingAverage();
-        [ValueInfoItem("Periapsis", InfoItem.Category.Orbit, units = "m", format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = 0, category = InfoItem.Category.Orbit)]
+        [ValueInfoItem("近拱点", InfoItem.Category.Orbit, units = "m", format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = 0, category = InfoItem.Category.Orbit)]
         public MovingAverage orbitPeA = new MovingAverage();
-        [ValueInfoItem("Orbital period", InfoItem.Category.Orbit, format = ValueInfoItem.TIME, category = InfoItem.Category.Orbit)]
+        [ValueInfoItem("轨道周期", InfoItem.Category.Orbit, format = ValueInfoItem.TIME, category = InfoItem.Category.Orbit)]
         public MovingAverage orbitPeriod = new MovingAverage();
-        [ValueInfoItem("Time to apoapsis", InfoItem.Category.Orbit, format = ValueInfoItem.TIME, timeDecimalPlaces = 1)]
+        [ValueInfoItem("到远拱点时间", InfoItem.Category.Orbit, format = ValueInfoItem.TIME, timeDecimalPlaces = 1)]
         public MovingAverage orbitTimeToAp = new MovingAverage();
-        [ValueInfoItem("Time to periapsis", InfoItem.Category.Orbit, format = ValueInfoItem.TIME, timeDecimalPlaces = 1)]
+        [ValueInfoItem("到近拱点时间", InfoItem.Category.Orbit, format = ValueInfoItem.TIME, timeDecimalPlaces = 1)]
         public MovingAverage orbitTimeToPe = new MovingAverage();
         [ValueInfoItem("LAN", InfoItem.Category.Orbit, format = ValueInfoItem.ANGLE)]
         public MovingAverage orbitLAN = new MovingAverage();
         [ValueInfoItem("Argument of periapsis", InfoItem.Category.Orbit, format = "F1", units = "º")]
         public MovingAverage orbitArgumentOfPeriapsis = new MovingAverage();
-        [ValueInfoItem("Inclination", InfoItem.Category.Orbit, format = "F3", units = "º")]
+        [ValueInfoItem("倾角", InfoItem.Category.Orbit, format = "F3", units = "º")]
         public MovingAverage orbitInclination = new MovingAverage();
-        [ValueInfoItem("Eccentricity", InfoItem.Category.Orbit, format = "F3")]
+        [ValueInfoItem("偏心率", InfoItem.Category.Orbit, format = "F3")]
         public MovingAverage orbitEccentricity = new MovingAverage();
-        [ValueInfoItem("Semi-major axis", InfoItem.Category.Orbit, format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = 0, units = "m")]
+        [ValueInfoItem("半长轴", InfoItem.Category.Orbit, format = ValueInfoItem.SI, siSigFigs = 6, siMaxPrecision = 0, units = "m")]
         public MovingAverage orbitSemiMajorAxis = new MovingAverage();
-        [ValueInfoItem("Latitude", InfoItem.Category.Surface, format = ValueInfoItem.ANGLE_NS)]
+        [ValueInfoItem("纬度", InfoItem.Category.Surface, format = ValueInfoItem.ANGLE_NS)]
         public MovingAverage latitude = new MovingAverage();
-        [ValueInfoItem("Longitude", InfoItem.Category.Surface, format = ValueInfoItem.ANGLE_EW)]
+        [ValueInfoItem("经度", InfoItem.Category.Surface, format = ValueInfoItem.ANGLE_EW)]
         public MovingAverage longitude = new MovingAverage();
 
         public double radius;  //distance from planet center
@@ -108,13 +108,13 @@ namespace MuMech
         public double torqueThrustPYAvailable;
         public double massDrag;
         public double atmosphericDensity;
-        [ValueInfoItem("Atmosphere density", InfoItem.Category.Misc, format = ValueInfoItem.SI, units = "g/m³")]
+        [ValueInfoItem("大气密度", InfoItem.Category.Misc, format = ValueInfoItem.SI, units = "g/m³")]
         public double atmosphericDensityGrams;
-        [ValueInfoItem("Intake air", InfoItem.Category.Vessel, format = ValueInfoItem.SI, units = "kg/s")]
+        [ValueInfoItem("进气", InfoItem.Category.Vessel, format = ValueInfoItem.SI, units = "kg/s")]
         public double intakeAir;
-        [ValueInfoItem("Intake air needed", InfoItem.Category.Vessel, format = ValueInfoItem.SI, units = "kg/s")]
+        [ValueInfoItem("所需进气", InfoItem.Category.Vessel, format = ValueInfoItem.SI, units = "kg/s")]
         public double intakeAirNeeded;
-        [ValueInfoItem("Intake air needed (max)", InfoItem.Category.Vessel, format = ValueInfoItem.SI, units = "kg/s")]
+        [ValueInfoItem("所需进气 (max)", InfoItem.Category.Vessel, format = ValueInfoItem.SI, units = "kg/s")]
         public double intakeAirAtMax;
         [ValueInfoItem("Angle to prograde", InfoItem.Category.Orbit, format = "F2", units = "º")]
         public double angleToPrograde;

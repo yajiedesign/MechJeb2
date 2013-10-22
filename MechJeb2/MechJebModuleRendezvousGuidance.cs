@@ -137,7 +137,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "汇合规划";
+            return "会和规划";
         }
     }
 }

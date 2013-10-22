@@ -9,7 +9,7 @@ namespace MuMech
     public class MechJebModuleWarpHelper : DisplayModule
     {
         public enum WarpTarget { Periapsis, Apoapsis, Node, SoI }
-        static string[] warpTargetStrings = new string[] { "periapsis", "apoapsis", "maneuver node", "SoI transition" };
+        static string[] warpTargetStrings = new string[] { "近拱点", "远拱点", "变轨节点", "母星变更" };
         static readonly int numWarpTargets = Enum.GetNames(typeof(WarpTarget)).Length;
         [Persistent(pass = (int)Pass.Global)]
         public WarpTarget warpTarget = WarpTarget.Periapsis;
@@ -34,7 +34,7 @@ namespace MuMech
 
             if (warping)
             {
-                if (GUILayout.Button("Abort"))
+                if (GUILayout.Button("取消"))
                 {
                     warping = false;
                     core.warp.MinimumWarp(true);
@@ -42,7 +42,7 @@ namespace MuMech
             }
             else
             {
-                if (GUILayout.Button("Warp")) warping = true;
+                if (GUILayout.Button("加速")) warping = true;
             }
 
             GUILayout.EndHorizontal();
@@ -99,7 +99,7 @@ namespace MuMech
 
         public override string GetName()
         {
-            return "自动加速";
+            return "时间加速";
         }
 
         public MechJebModuleWarpHelper(MechJebCore core) : base(core) { }
