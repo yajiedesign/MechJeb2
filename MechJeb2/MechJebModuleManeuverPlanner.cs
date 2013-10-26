@@ -199,23 +199,23 @@ namespace MuMech
                     break;
 
                 case Operation.ELLIPTICIZE:
-                    GuiUtils.SimpleTextBox("New periapsis:", newPeA, "km");
-                    GuiUtils.SimpleTextBox("New apoapsis:", newApA, "km");
+                    GuiUtils.SimpleTextBox("新近拱点:", newPeA, "km");
+                    GuiUtils.SimpleTextBox("新远拱点:", newApA, "km");
                     GUILayout.Label("开始执行在");
                     break;
 
                 case Operation.PERIAPSIS:
-                    GuiUtils.SimpleTextBox("New periapsis:", newPeA, "km");
+                    GuiUtils.SimpleTextBox("新近拱点:", newPeA, "km");
                     GUILayout.Label("开始执行在");
                     break;
 
                 case Operation.APOAPSIS:
-                    GuiUtils.SimpleTextBox("New apoapsis:", newApA, "km");
+                    GuiUtils.SimpleTextBox("新远拱点:", newApA, "km");
                     GUILayout.Label("开始执行在");
                     break;
 
                 case Operation.INCLINATION:
-                    GuiUtils.SimpleTextBox("New inclination:", newInc, "º");
+                    GuiUtils.SimpleTextBox("新倾角:", newInc, "º");
                     GUILayout.Label("开始执行在");
                     break;
 
@@ -237,7 +237,7 @@ namespace MuMech
                     break;
 
                 case Operation.COURSE_CORRECTION:
-                    if (core.target.Target is CelestialBody) GuiUtils.SimpleTextBox("Approximate final periapsis", courseCorrectFinalPeA, "km");
+                    if (core.target.Target is CelestialBody) GuiUtils.SimpleTextBox("预期的最后近拱点", courseCorrectFinalPeA, "km");
                     GUILayout.Label("开始执行在所需ΔV最少时.");
                     break;
 
